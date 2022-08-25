@@ -1,4 +1,4 @@
-dbx
+dbx==0.6.4
 setuptools
 wheel
 pyspark==3.0.0
