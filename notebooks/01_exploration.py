@@ -211,16 +211,3 @@ display(sql("select * from loan_by_state_pq"))
 # MAGIC   UPDATE SET d.count = m.count
 # MAGIC WHEN NOT MATCHED 
 # MAGIC   THEN INSERT (SELECT * FROM m)
-
-# COMMAND ----------
-
-# MAGIC %md ## Run Our Model
-# MAGIC Let's try to predict loan grades!
-
-# COMMAND ----------
-
-
-
-# COMMAND ----------
-
-

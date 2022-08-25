@@ -135,6 +135,7 @@ x_train, x_test, y_train, y_test = train_test_split(pandas_df.loc[:,predictors],
 
 from sklearn.ensemble import RandomForestClassifier
 import mlflow
+from mlflow.models import infer_signature
 
 mlflow.sklearn.autolog()
 
@@ -147,4 +148,4 @@ with mlflow.start_run(run_name="Training"):
       cl, "model", registered_model_name=model_name, signature=signature
   )
   mlflow.set_tag("action", "training")
-  mlflow.sklearn.eval_and_log_metrics(estimator, x, y, prefix="val_")
+  mlflow.sklearn.eval_and_log_metrics(cl, x_test, y_test, prefix="val_")
