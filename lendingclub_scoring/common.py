@@ -1,4 +1,5 @@
-import json
+import yaml
+import pathlib
 from abc import ABC, abstractmethod
 from argparse import ArgumentParser
 from logging import Logger
@@ -53,12 +54,17 @@ class Job(ABC):
         return namespace.conf_file
 
     def _read_config(self, conf_file) -> Dict[str, Any]:
-
-        filename = conf_file.replace("dbfs:/", "/dbfs/")
-        config = None
-        with open(filename, "r", encoding="utf-8") as file:
-            config = json.load(file)
-
+        if "s3://" in conf_file or "dbfs:/" in conf_file:
+            conf_file_content = "\n".join(
+                self.spark.read.format("text")
+                .load(conf_file)
+                .toPandas()["value"]
+                .tolist()
+            )
+            config = yaml.safe_load(conf_file_content)
+        else:
+            conf_path = pathlib.Path(__file__).parent.absolute()
+            config = yaml.safe_load(pathlib.Path(f"{conf_path}/{conf_file}").read_text())
         return config
 
     def _prepare_logger(self) -> Logger:

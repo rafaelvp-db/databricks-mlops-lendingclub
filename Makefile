@@ -7,6 +7,9 @@ unit:
 integration:
 	dbx execute --job=lendingclub_scoring_dbx-sample-integration-test --cluster-name "Shared Autoscaling EMEA"
 
+train:
+	dbx execute --job=training-pipeline --cluster-name "Shared Autoscaling EMEA"
+
 job:
 	dbx launch --job=lendingclub_scoring_dbx-sample-integration-test --trace
 

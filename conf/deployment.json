@@ -16,7 +16,7 @@
           "python_file": "lendingclub_scoring/jobs/abtest_entrypoint.py",
           "parameters": [
             "--conf-file",
-            "conf/test/abtest.json"
+            "file://conf/test/abtest.json"
           ]
         }
       },
@@ -35,7 +35,7 @@
           "python_file": "lendingclub_scoring/jobs/consumer_entrypoint.py",
           "parameters": [
             "--conf-file",
-            "conf/lendingclub_config.json"
+            "file://conf/lendingclub_config.json"
           ]
         }
       },
@@ -50,7 +50,7 @@
           "python_file": "lendingclub_scoring/jobs/train_entrypoint.py",
           "parameters": [
             "--conf-file",
-            "conf/lendingclub_config.json"
+            "file://conf/lendingclub_config.json"
           ]
         }
       },
@@ -69,7 +69,7 @@
           "python_file": "lendingclub_scoring/jobs/model_eval_entrypoint.py",
           "parameters": [
             "--conf-file",
-            "conf/lendingclub_config.json"
+            "file://conf/lendingclub_config.json"
           ]
         }
       },
@@ -88,7 +88,7 @@
           "python_file": "lendingclub_scoring/jobs/webhook_entrypoint.py",
           "parameters": [
             "--conf-file",
-            "conf/lendingclub_config.json"
+            "file://conf/lendingclub_config.json"
           ]
         }
       },
@@ -107,7 +107,7 @@
           "python_file": "tests/integration/sample_test.py",
           "parameters": [
             "--conf-file",
-            "conf/lendingclub_config.json"
+            "file://conf/lendingclub_config.json"
           ]
         }
       }
