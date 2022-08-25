@@ -53,10 +53,12 @@ class Job(ABC):
         return namespace.conf_file
 
     def _read_config(self, conf_file) -> Dict[str, Any]:
-        raw_content = "".join(
-            self.spark.read.format("text").load(conf_file).toPandas()["value"].tolist()
-        )
-        config = json.loads(raw_content)
+        
+        filename = conf_file.replace("dbfs:/", "/dbfs/")
+        config = None
+        with open(filename, "r") as file:
+            config = json.load(file)
+        
         return config
 
     def _prepare_logger(self) -> Logger:
