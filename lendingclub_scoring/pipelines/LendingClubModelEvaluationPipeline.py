@@ -146,4 +146,5 @@ class LendingClubModelEvaluationPipeline:
         predictions = model.predict(x)
         # acc = accuracy_score(Y, predictions)
         roc = roc_auc_score(y, predictions)
+        # test
         return roc
