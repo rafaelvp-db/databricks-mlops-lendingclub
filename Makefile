@@ -10,5 +10,11 @@ integration:
 job:
 	dbx launch --job=lendingclub_scoring_dbx-sample-integration-test --trace
 
+lint:
+	flake8 lendingclub_scoring
+
+black:
+	black lendingclub_scoring
+
 clean:
 	rm -rf *.egg-info && rm -rf .pytest_cache

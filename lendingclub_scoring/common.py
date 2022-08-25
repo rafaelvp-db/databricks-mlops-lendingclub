@@ -53,12 +53,12 @@ class Job(ABC):
         return namespace.conf_file
 
     def _read_config(self, conf_file) -> Dict[str, Any]:
-        
+
         filename = conf_file.replace("dbfs:/", "/dbfs/")
         config = None
         with open(filename, "r") as file:
             config = json.load(file)
-        
+
         return config
 
     def _prepare_logger(self) -> Logger:
