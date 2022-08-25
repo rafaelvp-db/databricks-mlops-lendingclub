@@ -56,7 +56,7 @@ class Job(ABC):
 
         filename = conf_file.replace("dbfs:/", "/dbfs/")
         config = None
-        with open(filename, "r") as file:
+        with open(filename, "r", encoding="utf-8") as file:
             config = json.load(file)
 
         return config
