@@ -5,7 +5,8 @@ import mlflow.sklearn
 from mlflow.models import infer_signature
 from pyspark.sql import SparkSession
 from sklearn.ensemble import RandomForestClassifier
-from lendingclub_scoring.data.DataProvider import LendingClubDataProvider
+from sklearn.metrics import roc_auc_score
+from lendingclub_scoring.data.data_provider import LendingClubDataProvider
 from lendingclub_scoring.webhooks import setup_webhook_for_model
 from typing import Dict
 
@@ -30,6 +31,9 @@ class TrainingPipeline:
         with mlflow.start_run(run_name="Training"):
             cl = RandomForestClassifier(n_estimators=20)
             cl.fit(x_train, y_train)
+            pred = cl.predict(x_test)
+            roc_auc = roc_auc_score(y_test, pred)
+            mlflow.log_metric("roc_auc_val", roc_auc)
             signature = infer_signature(x_train, y_train)
             _model_name = None
             if self.conf.get("training_promote_candidates", False):
@@ -38,7 +42,6 @@ class TrainingPipeline:
                 cl, "model", registered_model_name=_model_name, signature=signature
             )
             mlflow.set_tag("action", "training")
-            self.eval_and_log_metrics(cl, x_test, y_test)
             if self.conf.get("training_webhook_for_model_eval", False):
                 setup_webhook_for_model(
                     self.model_name,
@@ -47,10 +50,6 @@ class TrainingPipeline:
                         "training_webhook_event", "MODEL_VERSION_TRANSITIONED_STAGE"
                     ),
                 )
-
-    def eval_and_log_metrics(self, estimator, x, y):
-        mlflow.sklearn.eval_and_log_metrics(estimator, x, y, prefix="val_")
-        mlflow.set_tag("candidate", "true")
 
 
 class TrainTask(Task):

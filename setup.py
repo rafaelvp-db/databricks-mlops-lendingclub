@@ -42,7 +42,8 @@ setup(
             "train = lendingclub_scoring.tasks.train:entrypoint",
             "abtest = lendingclub_scoring.tasks.abtest:entrypoint",
             "eval = lendingclub_scoring.tasks.eval:entrypoint",
-            "score = lendingclub_scoring.tasks.score:entrypoint"
+            "score = lendingclub_scoring.tasks.score:entrypoint",
+            "deploy = lendingclub_scoring.tasks.deploy:entrypoint"
     ]},
     version=__version__,
     description="",
