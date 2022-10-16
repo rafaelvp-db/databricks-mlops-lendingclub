@@ -1,5 +1,5 @@
 import unittest
-from lendingclub_scoring.jobs.train_entrypoint import TrainJob
+from lendingclub_scoring.tasks.train import TrainTask
 from uuid import uuid4
 from pyspark.dbutils import DBUtils
 
@@ -15,7 +15,7 @@ class SampleJobIntegrationTest(unittest.TestCase):
             "experiment-path": "/Shared/leclub_test",
         }
 
-        self.job = TrainJob(init_conf=self.test_config)
+        self.job = TrainTask(init_conf=self.test_config)
         self.dbutils = DBUtils(self.job.spark)
         self.spark = self.job.spark
 

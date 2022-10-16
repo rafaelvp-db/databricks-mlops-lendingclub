@@ -4,7 +4,7 @@
 # COMMAND ----------
 
 import json
-from lendingclub_scoring.common import Job
+from lendingclub_scoring.common import Task
 from lendingclub_scoring.config.ConfigProvider import setup_mlflow_config
 from lendingclub_scoring.pipelines.LendingClubTrainingPipeline import (
     LendingClubTrainingPipeline,

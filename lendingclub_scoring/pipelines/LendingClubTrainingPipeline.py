@@ -23,6 +23,7 @@ class LendingClubTrainingPipeline:
         self.train(x_train, x_test, y_train, y_test)
 
     def train(self, x_train, x_test, y_train, y_test):
+        mlflow.set_experiment(self.conf['experiment-path'])
         mlflow.sklearn.autolog()
         # cl = LogisticRegression(random_state=42, max_iter=10)
         with mlflow.start_run(run_name="Training"):

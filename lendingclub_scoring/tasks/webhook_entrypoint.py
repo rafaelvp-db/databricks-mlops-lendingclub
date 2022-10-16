@@ -1,14 +1,14 @@
 import json
 from typing import Dict
 import sys
-from lendingclub_scoring.common import Job
+from lendingclub_scoring.common import Task
 from lendingclub_scoring.config.ConfigProvider import setup_mlflow_config
 from lendingclub_scoring.pipelines.LendingClubModelEvaluationPipeline import (
     LendingClubModelEvaluationPipeline,
 )
 
 
-class WHModelEvalJob(Job):
+class WHModelEvalJob(Task):
     def __init__(self, webhook_conf: Dict[str, str]):
         self.webhook_conf = webhook_conf
         super().__init__()

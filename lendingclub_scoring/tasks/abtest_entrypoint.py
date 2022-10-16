@@ -1,11 +1,11 @@
-from lendingclub_scoring.common import Job
+from lendingclub_scoring.common import Task
 from lendingclub_scoring.config.ConfigProvider import setup_mlflow_config
-from lendingclub_scoring.pipelines.LendingClubConsumerPipeline import (
-    LendingClubConsumerPipeline,
+from lendingclub_scoring.pipelines.LendingClubABTestPipeline import (
+    LendingClubABTestPipeline,
 )
 
 
-class ConsumerJob(Job):
+class ABTestJob(Task):
     def init_adapter(self):
         pass
 
@@ -13,12 +13,13 @@ class ConsumerJob(Job):
         self.logger.info("Launching bootstrap job")
 
         setup_mlflow_config(self.conf)
-        p = LendingClubConsumerPipeline(
+        p = LendingClubABTestPipeline(
             self.spark,
             self.conf["data-path"],
             self.conf["output-path"],
             self.conf["model-name"],
-            self.conf["stage"],
+            self.conf["prod_version"],
+            self.conf["test_version"],
         )
         p.run()
 
@@ -28,5 +29,5 @@ class ConsumerJob(Job):
 
 
 if __name__ == "__main__":
-    job = ConsumerJob()
+    job = ABTestJob()
     job.launch()

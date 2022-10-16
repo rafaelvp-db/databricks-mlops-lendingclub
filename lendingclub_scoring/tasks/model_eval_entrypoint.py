@@ -1,11 +1,11 @@
-from lendingclub_scoring.common import Job
+from lendingclub_scoring.common import Task
 from lendingclub_scoring.config.ConfigProvider import setup_mlflow_config
 from lendingclub_scoring.pipelines.LendingClubModelEvaluationPipeline import (
     LendingClubModelEvaluationPipeline,
 )
 
 
-class ModelEvalJob(Job):
+class ModelEvalJob(Task):
     def init_adapter(self):
         pass
 
