@@ -1,0 +1,5 @@
+{
+  "experiment-path": "/Shared/dbx/projects/lendingclub",
+  "model-name": "LendingClubScoringModelRVP",
+  "data-path": "dbfs:/databricks-datasets/samples/lending_club/parquet"
+}

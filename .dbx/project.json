@@ -1,0 +1,20 @@
+{
+    "environments": {
+        "default": {
+<<<<<<< HEAD
+            "profile": "default",
+            "workspace_dir": "/Shared/dbx/projects/lendingclubscoringdbx",
+            "artifact_location": "dbfs:/dbx/lendingclubscoringdbx"
+=======
+            "profile": "DEFAULT",
+            "storage_type": "mlflow",
+            "properties": {
+                "workspace_directory": "/Shared/dbx/lendingclub",
+                "artifact_location": "dbfs:/Shared/dbx/projects/lendingclub"
+            }
+>>>>>>> upgrade
+        }
+    },
+    "inplace_jinja_support": false,
+    "failsafe_cluster_reuse_with_assets": false
+}
