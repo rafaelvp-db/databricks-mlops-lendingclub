@@ -39,7 +39,8 @@ setup(
     extras_require={"local": LOCAL_REQUIREMENTS, "test": TEST_REQUIREMENTS},
     entry_points = {
         "console_scripts": [
-            "train = lendingclub_scoring.tasks.train:entrypoint"
+            "train = lendingclub_scoring.tasks.train:entrypoint",
+            "abtest = lendingclub_scoring.tasks.abtest:entrypoint"
     ]},
     version=__version__,
     description="",

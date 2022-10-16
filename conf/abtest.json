@@ -4,6 +4,6 @@
   "data-path": "dbfs:/databricks-datasets/samples/lending_club/parquet",
   "model-name": "LendingClubScoringModelRVP",
   "output-path": "dbfs:/tmp/rvp/le_abtest",
-  "prod_version": "5",
-  "test_version": "6"
+  "prod_version": "1",
+  "test_version": "2"
 }

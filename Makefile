@@ -13,5 +13,8 @@ test:
 train:
 	dbx execute lendingclub-rvp-train --cluster-id "0807-225846-motto493" --task main
 
+abtest:
+	dbx execute lendingclub-rvp-abtest --cluster-id "0807-225846-motto493" --task main
+
 clean:
 	rm -rf *.egg-info && rm -rf .pytest_cache

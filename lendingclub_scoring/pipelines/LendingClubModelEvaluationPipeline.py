@@ -9,7 +9,7 @@ from pyspark.sql import SparkSession
 from sklearn.metrics import roc_auc_score
 
 from lendingclub_scoring.data.DataProvider import LendingClubDataProvider
-from lendingclub_scoring.deploy import deploy_to_sagemaker
+from lendingclub_scoring.deploy.deployment_pipeline import ModelDeploymentPipeline
 
 
 class LendingClubModelEvaluationPipeline:
@@ -35,7 +35,7 @@ class LendingClubModelEvaluationPipeline:
         _, x_test, _, y_test = self.data_provider.run()
         if self.conf.get("model_eval_mode", "simple_runs") == "promoted_candidates":
             print(
-                f'Searhing for Promoted candidates for {self.conf["promoted_candidate_model_name"]} model '
+                f'Searching for Promoted candidates for {self.conf["promoted_candidate_model_name"]} model '
                 + f'and version {self.conf["promoted_candidate_model_version"]}...'
             )
             cand_run_id, cand_model_version = self.get_run_id_for_model_version(
@@ -44,7 +44,7 @@ class LendingClubModelEvaluationPipeline:
             )
             cand_run_ids = [cand_run_id]
         else:
-            print("Searhing for Simple Candidate runs...")
+            print("Searching for Simple Candidate runs...")
             cand_run_ids = self.get_candidate_models()
         print(f"Found following candidate runs: {cand_run_ids}")
         best_cand_roc, best_cand_run_id = self.get_best_model(
@@ -79,19 +79,19 @@ class LendingClubModelEvaluationPipeline:
             prod_run_id = best_cand_run_id
             deployed = True
             print("Deployed version: ", model_version.version)
-            if self.conf.get("model_deployment_type", "none") == "sagemaker":
-                print("Performing SageMaker deployment...")
-                try:
-                    deploy_to_sagemaker(
-                        self.conf["sagemaker_endpoint_name"],
-                        self.conf["sagemaker_image_url"],
-                        model_uri,
-                        self.conf["sagemaker_region"],
-                    )
-                except Exception as e:
-                    print(
-                        "Error has occured while deploying the model to SageMaker: ", e
-                    )
+            print("Performing deployment...")
+            try:
+                pipeline = ModelDeploymentPipeline(spark = self.spark)
+                deploy_to_sagemaker(
+                    self.conf["sagemaker_endpoint_name"],
+                    self.conf["sagemaker_image_url"],
+                    model_uri,
+                    self.conf["sagemaker_region"],
+                )
+            except Exception as e:
+                print(
+                    "Error has occured while deploying the model to SageMaker: ", e
+                )
         else:
             print(
                 "Candidate models are not better that the one we have currently in Production. Doing nothing..."
