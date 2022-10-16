@@ -40,7 +40,9 @@ setup(
     entry_points = {
         "console_scripts": [
             "train = lendingclub_scoring.tasks.train:entrypoint",
-            "abtest = lendingclub_scoring.tasks.abtest:entrypoint"
+            "abtest = lendingclub_scoring.tasks.abtest:entrypoint",
+            "eval = lendingclub_scoring.tasks.eval:entrypoint",
+            "score = lendingclub_scoring.tasks.score:entrypoint"
     ]},
     version=__version__,
     description="",

@@ -8,15 +8,11 @@ class ModelDeploymentPipeline:
     def __init__(
         self,
         spark,
-        db_name,
-        model_name,
-        experiment_name,
-        run_name,
+        db_name
     ):
-        self._model_name = model_name
+        self._model_name = self.conf['model-name']
         self._spark = spark
         self._db_name = db_name
-        self._run_name = run_name
         self._experiment_path = self.conf['experiment-path']
         self._client = MlflowClient()
         self._host = self.spark.conf.get("spark.databricks.workspaceUrl")
@@ -174,3 +170,32 @@ class ModelDeploymentPipeline:
         self._promote_to_staging(best_run_id=best_run_id)
         self._promote_to_production(best_run_id=best_run_id)
         self._enable_endpoint()
+
+
+class ModelDeploymentTask(Task):
+    def init_adapter(self):
+        pass
+
+    def launch(self):
+        self.logger.info("Launching bootstrap job")
+
+        p = ModelDeploymentPipeline(
+            self.spark,
+            self.conf["data-path"],
+            self.conf["output-path"],
+            self.conf["model-name"],
+            self.conf["consumer_stage"],
+        )
+        p.run()
+        self.spark.read.load(self.conf["output-path"]).show(10, False)
+        self.logger.info("Bootstrap job finished!")
+
+
+# if you're using python_wheel_task, you'll need the entrypoint function to be used in setup.py
+def entrypoint():  # pragma: no cover
+    task = ModelDeploymentTask()
+    task.launch()
+
+# if you're using spark_python_task, you'll need the __main__ block to start the code execution
+if __name__ == '__main__':
+    entrypoint()

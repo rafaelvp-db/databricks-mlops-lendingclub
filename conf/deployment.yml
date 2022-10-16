@@ -40,4 +40,20 @@ environments:
               entry_point: "abtest" # take a look at the setup.py entry_points section for details on how to define an entrypoint
               parameters: ["--conf-file", "file:fuse://conf/abtest.json"]
             existing_cluster_id: 0807-225846-motto493
+      - name: "lendingclub-rvp-eval"
+        tasks:
+          - task_key: "main"
+            python_wheel_task:
+              package_name: "lendingclub_scoring"
+              entry_point: "eval" # take a look at the setup.py entry_points section for details on how to define an entrypoint
+              parameters: ["--conf-file", "file:fuse://conf/config.json"]
+            existing_cluster_id: 0807-225846-motto493
+      - name: "lendingclub-rvp-score"
+        tasks:
+          - task_key: "main"
+            python_wheel_task:
+              package_name: "lendingclub_scoring"
+              entry_point: "score" # take a look at the setup.py entry_points section for details on how to define an entrypoint
+              parameters: ["--conf-file", "file:fuse://conf/config.json"]
+            existing_cluster_id: 0807-225846-motto493
 
