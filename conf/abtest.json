@@ -2,15 +2,8 @@
   "output_format": "delta",
   "experiment-path": "/Shared/dbx/projects/lendingclubscoringdbx",
   "data-path": "dbfs:/databricks-datasets/samples/lending_club/parquet",
-<<<<<<< HEAD:conf/lendingclub_abtest_config.json
-  "model-name": "LendingClubScoringModel",
-  "output-path": "dbfs:/tmp/le_abtest",
-  "prod_version": "5",
-  "test_version": "6"
-=======
   "model-name": "LendingClubScoringModelRVP",
   "output-path": "dbfs:/tmp/rvp/le_abtest",
   "prod_version": "1",
   "test_version": "2"
->>>>>>> upgrade:conf/abtest.json
 }

@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-import yaml
-import pathlib
-=======
->>>>>>> upgrade
 from abc import ABC, abstractmethod
 from argparse import ArgumentParser
 from typing import Dict, Any
@@ -85,24 +80,9 @@ class Task(ABC):
         namespace = p.parse_known_args(sys.argv[1:])[0]
         return namespace.conf_file
 
-<<<<<<< HEAD
-    def _read_config(self, conf_file) -> Dict[str, Any]:
-        if "s3://" in conf_file or "dbfs:/" in conf_file:
-            conf_file_content = "\n".join(
-                self.spark.read.format("text")
-                .load(conf_file)
-                .toPandas()["value"]
-                .tolist()
-            )
-            config = yaml.safe_load(conf_file_content)
-        else:
-            conf_path = pathlib.Path(__file__).parent.absolute()
-            config = yaml.safe_load(pathlib.Path(f"{conf_path}/{conf_file}").read_text())
-=======
     @staticmethod
     def _read_config(conf_file) -> Dict[str, Any]:
         config = yaml.safe_load(pathlib.Path(conf_file).read_text())
->>>>>>> upgrade
         return config
 
     def _prepare_logger(self):

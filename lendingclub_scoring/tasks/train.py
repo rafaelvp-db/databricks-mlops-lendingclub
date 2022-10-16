@@ -1,4 +1,3 @@
-from lendingclub_scoring.common import Task
 from lendingclub_scoring.config.ConfigProvider import setup_mlflow_config
 import mlflow
 import mlflow.sklearn
@@ -9,6 +8,7 @@ from sklearn.metrics import roc_auc_score
 from lendingclub_scoring.data.data_provider import LendingClubDataProvider
 from lendingclub_scoring.webhooks import setup_webhook_for_model
 from typing import Dict
+from lendingclub_scoring.common import Task
 
 
 class TrainingPipeline:
