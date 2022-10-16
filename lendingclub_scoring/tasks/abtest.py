@@ -5,7 +5,7 @@ import mlflow.sklearn
 from pyspark.sql import DataFrame
 from pyspark.sql.functions import lit, col
 
-from lendingclub_scoring.data.DataProvider import LendingClubDataProvider
+from lendingclub_scoring.data.data_provider import LendingClubDataProvider
 
 FEATURES = [
     "term",

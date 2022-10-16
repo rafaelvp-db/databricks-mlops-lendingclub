@@ -3,7 +3,7 @@ from lendingclub_scoring.config.ConfigProvider import setup_mlflow_config
 import mlflow
 import mlflow.sklearn
 
-from lendingclub_scoring.data.DataProvider import LendingClubDataProvider
+from lendingclub_scoring.data.data_provider import LendingClubDataProvider
 
 
 class ScorePipeline:

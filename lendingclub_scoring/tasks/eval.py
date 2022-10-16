@@ -11,7 +11,7 @@ from mlflow.tracking import MlflowClient
 from pyspark.sql import SparkSession
 from sklearn.metrics import roc_auc_score
 
-from lendingclub_scoring.data.DataProvider import LendingClubDataProvider
+from lendingclub_scoring.data.data_provider import LendingClubDataProvider
 
 
 class ModelEvaluationPipeline:
@@ -83,7 +83,7 @@ class ModelEvaluationPipeline:
                 the one we have currently in Production. 
                 Doing nothing..."""
             )
-            
+
         prod_metric = best_prod_roc
         prod_run_id = best_prod_run_id
 
