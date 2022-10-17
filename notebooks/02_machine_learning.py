@@ -32,7 +32,7 @@ target = "bad_loan"
 
 # COMMAND ----------
 
-df = spark.table()
+df = spark.table("loanstats_train")
 
 # COMMAND ----------
 
