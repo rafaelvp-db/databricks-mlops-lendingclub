@@ -143,7 +143,7 @@ with mlflow.start_run(run_name="Training"):
   cl = RandomForestClassifier(n_estimators=20)
   cl.fit(x_train, y_train)
   signature = infer_signature(x_train, y_train)
-  model_name = "my_model"
+  model_name = "lending_club_random_forest"
   mlflow.sklearn.log_model(
       cl, "model", registered_model_name=model_name, signature=signature
   )
