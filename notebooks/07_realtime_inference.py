@@ -4,6 +4,15 @@ import requests
 import numpy as np
 import pandas as pd
 import json
+import mlflow
+from mlflow.tracking import MlflowClient
+
+client = MlflowClient()
+model_name = "LendingClubScoringModelRVP"
+model_details = client.get_registered_model(name = model_name)
+print(f"Model details for {model_name}:\n {model_details}")
+
+# COMMAND ----------
 
 input_json = {
   "term": "30",
@@ -42,14 +51,13 @@ token = (
         .get()
 )
 
-url = 'https://adb-984752964297111.11.azuredatabricks.net/model-endpoint/LendingClubScoringModelRVP/7/invocations'
+version = 7
+url = f'https://adb-984752964297111.11.azuredatabricks.net/model-endpoint/{model_name}/{version}/invocations'
 headers = {'Authorization': f'Bearer {token}', 'Content-Type': 'application/json'}
 response = requests.request(method='POST', headers=headers, url=url, data=data)
 if response.status_code != 200:
   raise Exception(f'Request failed with status {response.status_code}, {response.text}')
-
-# COMMAND ----------
-
+  
 response.json()
 
 # COMMAND ----------

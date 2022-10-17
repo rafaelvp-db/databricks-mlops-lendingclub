@@ -96,4 +96,4 @@ test_prediction(run_id = latest_version.run_id)
 # COMMAND ----------
 
 # DBTITLE 1,Transition to Staging
-client.r(model_name, latest_version.version, stage="Staging")
+client.transition_model_version_stage(model_name, latest_version.version, stage="Staging")

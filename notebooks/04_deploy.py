@@ -1,10 +1,12 @@
 # Databricks notebook source
-def _enable_endpoint(host, token, model_name):
+import requests
 
-  auth_header = {"Authorization": "Bearer " + self._token}
+def enable_endpoint(host, token, model_name):
+
+  auth_header = {"Authorization": "Bearer " + token}
   endpoint_path = "/api/2.0/mlflow/endpoints-v2/enable"
-  payload = {"registered_model_name": self._model_name}
-  full_url = f"{self._host}{endpoint_path}"
+  payload = {"registered_model_name": model_name}
+  full_url = f"{host}{endpoint_path}"
   response = requests.post(
       url=full_url,
       json=payload,
@@ -13,11 +15,12 @@ def _enable_endpoint(host, token, model_name):
 
   if response.status_code != 200:
       raise ValueError(f"Error making POST request to Mlflow API - [{response.status_code}]: {response.text}")
+  return True
 
 # COMMAND ----------
 
-host = f"https://{self.spark.conf.get('spark.databricks.workspaceUrl')}"
-model_name = "LendingClubScoringModelRVP"
+host = f"https://{spark.conf.get('spark.databricks.workspaceUrl')}"
+model_name = "lending_club_random_forest"
 token = (
   dbutils
     .notebook
@@ -29,3 +32,7 @@ token = (
     .get()
 )
 enable_endpoint(host, token, model_name)
+
+# COMMAND ----------
+
+
