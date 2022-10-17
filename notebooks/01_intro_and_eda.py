@@ -46,10 +46,6 @@ print(str(loan_stats_ce.count()) + " loans opened by Lending Club...")
 
 # COMMAND ----------
 
-data.select("*").limit(10).toPandas().to_parquet("/dbfs/FileStore/test.parquet")
-
-# COMMAND ----------
-
 # DBTITLE 1,Filter Data and Fix Schema
 from pyspark.sql.functions import regexp_replace, substring, trim, round, count, col
 
