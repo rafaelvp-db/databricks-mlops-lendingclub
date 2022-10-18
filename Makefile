@@ -10,6 +10,9 @@ integration:
 train:
 	dbx execute --job=training-pipeline --cluster-name "Shared Autoscaling EMEA"
 
+ab:
+	dbx execute --job=abtest-pipeline --cluster-name "Shared Autoscaling EMEA"
+
 job:
 	dbx launch --job=lendingclub_scoring_dbx-sample-integration-test --trace
 

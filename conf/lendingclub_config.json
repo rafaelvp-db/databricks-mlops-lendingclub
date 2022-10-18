@@ -3,7 +3,7 @@
   "experiment-path": "/Shared/dbx/projects/lendingclubscoringdbx",
   "data-path": "dbfs:/databricks-datasets/samples/lending_club/parquet",
   "output-path": "dbfs:/tmp/leout",
-  "model-name": "LendingClubScoringModel",
+  "model-name": "LendingClubScoringModelRafael",
   "training_promote_candidates": true,
   "training_webhook_for_model_eval": true,
   "training_webhook_event": "MODEL_VERSION_TRANSITIONED_TO_STAGING",

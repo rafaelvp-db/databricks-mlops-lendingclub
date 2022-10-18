@@ -16,7 +16,7 @@
           "python_file": "lendingclub_scoring/jobs/abtest_entrypoint.py",
           "parameters": [
             "--conf-file",
-            "file://conf/test/abtest.json"
+            "file://conf/lendingclub_abtest_config.json"
           ]
         }
       },
