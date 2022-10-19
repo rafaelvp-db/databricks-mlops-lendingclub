@@ -6,7 +6,6 @@ from pyspark.sql import SparkSession
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import roc_auc_score
 from lendingclub_scoring.data.data_provider import LendingClubDataProvider
-from lendingclub_scoring.webhooks import setup_webhook_for_model
 from typing import Dict
 from lendingclub_scoring.common import Task
 
@@ -42,14 +41,6 @@ class TrainingPipeline:
                 cl, "model", registered_model_name=_model_name, signature=signature
             )
             mlflow.set_tag("action", "training")
-            if self.conf.get("training_webhook_for_model_eval", False):
-                setup_webhook_for_model(
-                    self.model_name,
-                    self.conf["training_model_eval_job_id"],
-                    self.conf.get(
-                        "training_webhook_event", "MODEL_VERSION_TRANSITIONED_STAGE"
-                    ),
-                )
 
 
 class TrainTask(Task):
